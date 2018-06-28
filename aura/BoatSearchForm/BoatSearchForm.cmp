@@ -1,0 +1,29 @@
+<!-- Boat Search Form -->
+<aura:component controller="LightningController" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:registerEvent name="formsubmit" type="c:FormSubmit" />
+    <aura:attribute name="boatTypes" type="BoatType__c[]" />
+    <aura:attribute name="createRecEventSupported" type="Boolean" />
+    
+    
+
+    
+    <lightning:layout horizontalAlign="center">
+    	<lightning:select aura:id="lightningSelect" name="" label="" variant="label-hidden">
+    		<option value="">All Types</option>
+        	<aura:iteration items="{!v.boatTypes}" var="boatType">
+            	<option value="{!boatType.Id}">{!boatType.Name}</option>
+            </aura:iteration>
+    	</lightning:select>
+    	
+        <!-- base, neutral, brand, destructive, inverse, success -->
+    	<lightning:button label="Search" variant="brand" onclick="{!c.onFormSubmit}" />
+    	<aura:if isTrue="{!v.createRecEventSupported}">
+        	<lightning:button label="New" variant="neutral" onclick="{!c.createRecord}" />
+        </aura:if>
+        
+    
+    </lightning:layout>
+    	 
+    
+</aura:component>

@@ -1,0 +1,23 @@
+<!-- BoatSearchResults -->
+<aura:component controller="BoatSearchResults" >
+    <aura:attribute name="boats" type="Boat__c[]" />
+    <aura:attribute name="boatTypeId" type="String" />
+    <aura:attribute name="selectedBoatId" type="String" />
+    <aura:method name="search" access="public" action="{!c.doSearch}">
+    	<aura:attribute name="boatTypeId" type="String" />
+    </aura:method>
+    <aura:handler name="boatselect" event="c:BoatSelect" action="{!c.onBoatSelect}" />
+    <!-- add a grid to this stuff -->
+    <lightning:layout multipleRows="true">
+    	<aura:iteration items="{!v.boats}" var="boat">
+            <lightning:layoutItem >
+            	<c:BoatTile boat="{!boat}" selected="{! v.selectedBoatId == boat.Id ? true : false}" />
+            </lightning:layoutItem>
+    	</aura:iteration>
+    </lightning:layout>
+    <!--lightning:button label="checkStateofBoats" onclick="{!c.checkState}" /-->
+    
+    <aura:if isTrue="{!v.boats.length == 0}">
+    	<div class="slds-align--absolute-center">No boats found</div>
+    </aura:if>
+</aura:component>
